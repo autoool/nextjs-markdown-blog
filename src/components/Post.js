@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { slugify } from '@/lib'
-
+import { ImageUrl } from '@/lib';
 export default function Post({ post }) {
 
   const date = new Date(post.frontmatter?.date)
   return (
     <div className="card mb-4">
-      <Link href={`/blog/${post.slug}`} > <img className="card-img-top" src={post.frontmatter.image} alt="..." /></Link>
+      <Link href={`/blog/${post.slug}`} > 
+      <img className="card-img-top" 
+      src={ImageUrl(post.frontmatter.image)}  /></Link>
       <div className="card-body">
         <div className="small text-muted">{`${date.getMonth() + 1} - ${date.getDate()} - ${date.getFullYear()}`}</div>
 

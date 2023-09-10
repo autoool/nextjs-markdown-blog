@@ -1,20 +1,23 @@
-import Head from 'next/head'
+"use client"
 
-import { useRouter } from 'next/router'
-
+import { useRouter } from 'next/navigation'
 
 import Post from '@/components/Post';
 import Banner from '@/components/Banner';
-import Search from ''
+import search from '@/config/search.json';
 
-export default function Search() {
-    const { query } = useRouter()
+export default function Search({params}) {
+    const slug = params.slug
+    const router= useRouter()
+    console.log(slug)
     const TempPosts = []
 
     search.map(
         (post) => {
             if (post.frontmatter.draft === false) {
-                if (post.frontmatter.title.toLowerCase().includes(query.q) || post.frontmatter.summary.toLowerCase().includes(query.q) || post.frontmatter.description.toLowerCase().includes(query.q)) {
+                if (post.frontmatter.title.toLowerCase().includes(params.slug)
+                 || post.frontmatter.summary.toLowerCase().includes(params.slug) 
+                || post.frontmatter.description.toLowerCase().includes(params.slug)) {
                     TempPosts.push(post)
                 } else {
                     TempPosts.push(null)
@@ -44,7 +47,7 @@ export default function Search() {
                                     <Post key={index} post={post} />
                                 )) : <div className='m-auto p-5 mx-5 '>
                                     <h2 className='text-center'>
-                                        {query.q ? `No post find base on ${query.q} ` : 'loadding.. '}
+                                        {params.slug? `No post find base on ${params.slug} ` : 'loadding.. '}
                                     </h2>
                                 </div>
                         }

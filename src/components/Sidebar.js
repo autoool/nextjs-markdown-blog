@@ -5,8 +5,8 @@ import Search from '@/config/search.json'
 
 export default function Sidebar() {
   const [search, setSearch] = useState()
-  function findSerach(value) {
-
+  function findSearch(value) {
+    console.log(value.target.value)
     setSearch(value.target.value)
   }
 
@@ -17,10 +17,11 @@ export default function Sidebar() {
         <div className="card-header">Search</div>
         <div className="card-body">
           <div className="input-group">
-            <input onChange={findSerach} className="form-control" type="text"
+            <input onChange={findSearch} className="form-control" type="text"
               placeholder="Enter search term..." aria-label="Enter search term..."
               aria-describedby="button-search" />
-            <Link className="btn btn-primary" id="button-search" href={{ pathname: '/Search', query: { q: search?.toLowerCase() } }}>
+            <Link className="btn btn-primary" id="button-search"
+              href={{ pathname: '/search/' + search }}>
               Go!
             </Link>
           </div>
